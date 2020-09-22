@@ -26,18 +26,17 @@ int main(){
 
         status = pthread_create(&thread, NULL, thread_func, (void*)sec_th);
         if (status != PTHREAD_CREATE_SUCCESS){
-                perror("Error in creating thread\n");
+                fprintf(stderr,"Error in creating second thread\n");
                 return EXIT_FAILURE;
         }
 
         status = pthread_join(thread, NULL);
         if (status != PTHREAD_JOIN_SUCCESS){
-                perror("Error in joining thread\n");
+                fprintf(stderr,"Error in joining second thread to main thread\n");
                 return EXIT_FAILURE;
         }
 
         print_ten_strings("Main thread");
         pthread_exit(NULL);
 }
-
 
