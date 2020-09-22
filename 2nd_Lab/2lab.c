@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <errno.h>
 
 #define PTHREAD_CREATE_SUCCESS 0
 #define PTHREAD_JOIN_SUCCESS 0
@@ -26,13 +27,15 @@ int main(){
 
         status = pthread_create(&thread, NULL, thread_func, (void*)sec_th);
         if (status != PTHREAD_CREATE_SUCCESS){
-                fprintf(stderr,"Error in creating second thread\n");
+		errno = status;
+                perror("Error in creating second thread");
                 return EXIT_FAILURE;
         }
 
         status = pthread_join(thread, NULL);
         if (status != PTHREAD_JOIN_SUCCESS){
-                fprintf(stderr,"Error in joining second thread to main thread\n");
+		errno = status;
+                perror("Error in joining second thread to main thread");
                 return EXIT_FAILURE;
         }
 
