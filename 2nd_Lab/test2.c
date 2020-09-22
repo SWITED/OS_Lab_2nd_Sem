@@ -17,8 +17,8 @@ void print_ten_strings(const char* name){
 }
 
 void* thread_func(void* args){
-        print_ten_strings((char*)args);
         sleep(30);
+	print_ten_strings((char*)args);
         pthread_exit(NULL);
 }
 
