@@ -38,8 +38,8 @@ int main() {
            handle_error_status(status, "Error in creating second thread");
         }
         sleep(WAIT_TIME);
-        printf("main(): sending cancellations request\n");
         
+        printf("main(): sending cancellations request\n");
         status = pthread_cancel(thread);
         if (status != PTHREAD_CANCEL_SUCCESS){
             handle_error_status(status, "Error in canceling thread");
