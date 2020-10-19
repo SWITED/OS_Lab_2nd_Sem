@@ -32,20 +32,24 @@ int main() {
         pthread_t thread;
         int status;
         void *res;
+        
         status = pthread_create(&thread, NULL, thread_func, NULL);
         if (status != PTHREAD_CREATE_SUCCESS){
            handle_error_status(status, "Error in creating second thread");
         }
         sleep(WAIT_TIME);
         printf("main(): sending cancellations request\n");
+        
         status = pthread_cancel(thread);
-        if (status != PTHREAD_CANCEL_SUCCESS) {
+        if (status != PTHREAD_CANCEL_SUCCESS){
             handle_error_status(status, "Error in canceling thread");
         }
+        
         status = pthread_join(thread, &res);
-        if(status != PTHREAD_JOIN_SUCCESS){
+        if (status != PTHREAD_JOIN_SUCCESS){
             handle_error_status(status, "Error in joining canceled thread");
         }
+        
         if (res == PTHREAD_CANCELED){
             printf("main(): thread was canceled\n");
         } else{
