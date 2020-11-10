@@ -22,7 +22,7 @@ void *handler(void *arg){
 
 
 void *thread_func(void* arg) {
-	    pthread_cleanup_push(&handler, NULL);
+	pthread_cleanup_push(&handler, NULL);
         printf("In child thread now\n");
         int i = 0;
         while(1) {
@@ -30,7 +30,6 @@ void *thread_func(void* arg) {
             printf("Still in the cycle: %d\n", i);
             i++;
         }
-	    pthread_cleanup_pop(NO_HANDLER);
         pthread_exit(NULL);
 }
 
