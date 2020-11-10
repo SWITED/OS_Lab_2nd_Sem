@@ -30,6 +30,7 @@ void *thread_func(void* arg) {
             printf("Still in the cycle: %d\n", i);
             i++;
         }
+	pthread_cleanup_pop(NO_HANDLER);
         pthread_exit(NULL);
 }
 
